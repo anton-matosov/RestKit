@@ -76,7 +76,7 @@
 
     // Setup View and Table View
     self.title = @"RestKit Tweets";
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackTranslucent;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(loadTimeline)];
 
@@ -94,7 +94,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize size = [[[_statuses objectAtIndex:indexPath.row] text] sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(300, 9000)];
+    CGSize size = [[[_statuses objectAtIndex:indexPath.row] text] boundingRectWithSize:CGSizeMake(300, 9000)
+                                                                               options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                                                                            attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14]}
+                                                                               context:nil].size;
+    
     return size.height + 50;
 }
 

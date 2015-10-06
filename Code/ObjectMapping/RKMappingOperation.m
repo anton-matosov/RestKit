@@ -152,6 +152,12 @@ static NSArray *RKInsertInMetadataList(NSArray *list, id metadata1, id metadata2
  in case it does this class provides the implementation.
  */
 @interface RKMetadataWrapper : NSObject
+
+/**
+ Suppress inherited initializer
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
 - (instancetype)initWithMappingSource:(RKMappingSourceObject *)source NS_DESIGNATED_INITIALIZER;
 @property (nonatomic, strong) RKMappingSourceObject *mappingSource;
 @end
@@ -1267,16 +1273,9 @@ static NSArray *RKInsertInMetadataList(NSArray *list, id metadata1, id metadata2
             self.mappingInfo = [[RKMappingInfo alloc] initWithObjectMapping:objectMapping dynamicMapping:nil];
         }
     }
-    
-    BOOL canSkipProperties = [dataSource respondsToSelector:@selector(mappingOperationShouldSkipPropertyMapping:)] && [dataSource mappingOperationShouldSkipPropertyMapping:self];
-    BOOL canSkipAttributes = canSkipProperties;
-    BOOL canSkipRelationships = canSkipProperties;
-    if ([dataSource respondsToSelector:@selector(mappingOperationShouldSkipRelationshipMapping:)]) {
-        canSkipRelationships = [dataSource mappingOperationShouldSkipRelationshipMapping:self];
-    }
-    if ([dataSource respondsToSelector:@selector(mappingOperationShouldSkipAttributeMapping:)]) {
-        canSkipAttributes = [dataSource mappingOperationShouldSkipAttributeMapping:self];
-    }
+
+    BOOL canSkipAttributes = [dataSource respondsToSelector:@selector(mappingOperationShouldSkipAttributeMapping:)] && [dataSource mappingOperationShouldSkipAttributeMapping:self];
+    BOOL canSkipRelationships = [dataSource respondsToSelector:@selector(mappingOperationShouldSkipRelationshipMapping:)] && [dataSource mappingOperationShouldSkipRelationshipMapping:self];
     if (!canSkipRelationships || !canSkipAttributes) {
         BOOL foundNoSimpleAttributes = NO;
         BOOL foundNoRelationships = NO;

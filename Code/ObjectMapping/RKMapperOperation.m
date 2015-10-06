@@ -69,7 +69,6 @@ static NSString *RKFailureReasonErrorStringForMappingNotFoundError(id representa
 @end
 
 @interface RKMapperOperation ()
-
 @property (nonatomic, strong, readwrite) NSError *error;
 @property (nonatomic, strong, readwrite) RKMappingResult *mappingResult;
 @property (nonatomic, strong) NSMutableArray *mappingErrors;

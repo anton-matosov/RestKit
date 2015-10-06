@@ -91,6 +91,11 @@
  */
 - (instancetype)initWithRepresentation:(id)representation mappingsDictionary:(NSDictionary *)mappingsDictionary NS_DESIGNATED_INITIALIZER;
 
+/**
+ Suppress inherited initializer
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
 ///------------------------------------------
 /// @name Accessing Mapping Result and Errors
 ///------------------------------------------

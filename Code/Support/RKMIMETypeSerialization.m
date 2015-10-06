@@ -34,6 +34,8 @@
 @property (nonatomic, strong) id MIMETypeStringOrRegularExpression;
 @property (nonatomic, assign) Class<RKSerialization> serializationClass;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (instancetype)initWithMIMEType:(id)MIMETypeStringOrRegularExpression serializationClass:(Class<RKSerialization>)serializationClass NS_DESIGNATED_INITIALIZER;
 - (BOOL)matchesMIMEType:(NSString *)MIMEType;
 @end

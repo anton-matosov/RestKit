@@ -82,6 +82,11 @@
  */
 - (instancetype)initWithRequest:(NSURLRequest *)urlRequest HTTPClient:(id<RKHTTPClient>)HTTPClient NS_DESIGNATED_INITIALIZER;
 
+/**
+ Suppress inherited initializer
+ */
+- (instancetype)init NS_UNAVAILABLE;
+
 ///----------------------------------
 /// @name Pausing / Resuming Requests
 ///----------------------------------
